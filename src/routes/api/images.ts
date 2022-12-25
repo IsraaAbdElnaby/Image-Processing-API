@@ -3,8 +3,7 @@ import { getImgPath } from "../../utils/utils";
 import fs from 'fs';
 
 const images = Router();
-
-images.get('/', (req: Request, res: Response): void => {
+images.get('/', async(req: Request, res: Response): Promise<void> => {
     const {imgFile, width, height} = req.query;
     if(imgFile) {
         const imgPath = await getImgPath(imgFile as string, parseInt(width as string), parseInt(height as string));
