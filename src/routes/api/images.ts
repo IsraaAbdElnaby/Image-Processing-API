@@ -1,6 +1,23 @@
 import express, { Request, Response, Router } from 'express';
-import { imagePath } from "../../utils/utils";
+import { getImgPath } from "../../utils/utils";
+import fs from 'fs';
 
-const images = express.Router();
- 
+const images = Router();
+
+images.get('/', (req: Request, res: Response): void => {
+    const {imgFile, width, height} = req.query;
+    if(imgFile) {
+        const imgPath = await getImgPath(imgFile as string, parseInt(width as string), parseInt(height as string));
+        if (fs.existsSync(imgPath)) {
+            res.sendFile(imgPath);
+        } else {
+            res.status(400);
+            res.send('Image path is incorrect');
+        }
+    } else {
+        res.status(400);
+        res.send('Image does not exist');
+    }
+});
+
 export default images;

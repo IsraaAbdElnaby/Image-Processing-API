@@ -3,23 +3,39 @@ import path from 'path';
 import sharp from 'sharp';
 
 const resizeImg = async (imgFile: string, width: number, height: number):
- Promise<string> => {
+ Promise< string> => {
     const imgsDir = getDirectory();
     if(width && height) {
-        const outPath = path.join(imgsDir, 'resized', `${imgFile}-width-${width}-height-${height}.jpg`);
+        const outPath = path.join(imgsDir, 'thumbnail', `${imgFile}-width-${width}-height-${height}.jpg`);
         const inPath = path.join(imgsDir,imgFile+'.jpg');
         const img = sharp(inPath);
 
         await img.resize ({
             width,
-            height: metadata.height
+            height
         })
         .toFile(outPath);
         return outPath;
-    } else if (!height && width) {
+    } else if (!height && width) { //if only width is provided
+        const outPath = path.join(imgsDir, 'thumbnail', `${imgFile}-width-${width}.jpg`);
+        const inPath = path.join(imgsDir,imgFile+'.jpg');
+        const img = sharp(inPath);
 
-    } else {
+        await img.resize ({
+            width
+        })
+        .toFile(outPath);
+        return outPath;
+    } else { //if only height is provided
+        const outPath = path.join(imgsDir, 'thumbnail', `${imgFile}-height-${height}.jpg`);
+        const inPath = path.join(imgsDir,imgFile+'.jpg');
+        const img = sharp(inPath);
 
+        await img.resize ({
+            height
+        })
+        .toFile(outPath);
+        return outPath;
     }
 }
 
