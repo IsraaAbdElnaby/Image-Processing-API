@@ -5,6 +5,12 @@ import sharp from 'sharp';
 const resizeImg = async (imgFile: string, width: number, height: number):
  Promise< string> => {
     const imgsDir = getDirectory();
+    const resizeDir = path.join(imgsDir, 'thumbnail');
+
+    if(!fs.existsSync(resizeDir)) {
+        fs.mkdirSync(resizeDir);
+    }
+    
     if(width && height) {
         const outPath = path.join(imgsDir, 'thumbnail', `${imgFile}-width-${width}-height-${height}.jpg`);
         const inPath = path.join(imgsDir,imgFile+'.jpg');
