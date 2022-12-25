@@ -1,4 +1,5 @@
-import express, { Application, Request, Response } from 'express'
+import express, { Application, Request, Response } from 'express';
+import routes from './routes';
 import morgan from 'morgan'
 import * as dotenv from 'dotenv'
 
@@ -9,13 +10,8 @@ const PORT = process.env.PORT || 3000
 const app: Application = express()
 // HTTP request logger middleware
 app.use(morgan('short'))
-
-// add routing for / path
-app.get('/', (req: Request, res: Response) => {
-  res.json({
-    message: 'Hello World 🌍'
-  })
-})
+// add routing for /api path
+app.use('/api', routes)
 
 // start express server
 app.listen(PORT, () => {
