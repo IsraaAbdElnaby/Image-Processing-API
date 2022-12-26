@@ -36,7 +36,6 @@ const resizeImg = async (imgFile: string, width: number, height: number): Promis
     return outPath
   } else {
     //if only height is provided
-    if (height > 0) {
       const outPath = path.join(imgsDir, 'thumbnail', `${imgFile}-height${height}.jpg`)
       const inPath = path.join(imgsDir, imgFile + '.jpg')
       const img = sharp(inPath)
@@ -46,8 +45,7 @@ const resizeImg = async (imgFile: string, width: number, height: number): Promis
           height
         })
         .toFile(outPath)
-      return outPath
-    }
+      return outPath 
   }
 }
 
