@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "dotenv": "^10.0.0",
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "jasmine": "^3.10.0",
     "jasmine-spec-reporter": "^7.0.0",
     "m-zanaty-web-utils": "^0.0.19",
@@ -19,7 +19,8 @@
     "build": "npx tsc",
     "start": "npm run build && nodemon build/index.js",
     "format": "prettier --write 'src/**/*.{ts,tsx,js,jsx}'",
-    "lint": "eslint . --ext .ts",
+    "prettier": "prettier --config .prettierrc --write src/**/*.ts ",
+    "lint": "eslint  'src/**/*.ts'  ",
     "lint:fix": "eslint --fix"
   },
   "keywords": [],
@@ -27,7 +28,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@types/express": "^4.17.13",
+    "@types/express": "^4.17.15",
     "@types/jasmine": "^3.10.2",
     "@types/morgan": "^1.9.3",
     "@types/node": "^16.11.12",
@@ -39,7 +40,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "nodemon": "^2.0.15",
-    "prettier": "^2.5.1",
+    "prettier": "^2.8.1",
     "rimraf": "^3.0.2",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.4"
