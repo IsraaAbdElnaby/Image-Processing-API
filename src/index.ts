@@ -1,5 +1,5 @@
-import express, { Application, Request, Response } from 'express';
-import routes from './routes';
+import express, { Application, Request, Response } from 'express'
+import routes from './routes'
 import morgan from 'morgan'
 import * as dotenv from 'dotenv'
 
@@ -13,12 +13,11 @@ app.use(morgan('short'))
 // add routing for /api path
 app.use('/api', routes)
 
-app.get(
-  '/',
-  async (req: Request, res: Response): Promise<void> => {
-    res.send('Welcom to Image Prossesing App..... use api/images?filename={yourfilename} to get started');
-  }
-);
+app.get('/', async (req: Request, res: Response): Promise<void> => {
+  res.send(
+    'Welcom to Image Prossesing App..... use api/images?filename={yourfilename} to get started'
+  )
+})
 
 // start express server
 app.listen(PORT, () => {
