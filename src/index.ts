@@ -2,6 +2,7 @@ import express, { Application, Request, Response } from 'express'
 import routes from './routes'
 import morgan from 'morgan'
 import * as dotenv from 'dotenv'
+import errorMiddleware from './middleware/error.middleware'
 
 dotenv.config()
 
@@ -18,6 +19,8 @@ app.get('/', async (req: Request, res: Response): Promise<void> => {
     'Welcom to Image Prossesing App..... use api/images?filename={yourfilename} to get started'
   )
 })
+
+app.use(errorMiddleware)
 
 // start express server
 app.listen(PORT, () => {
