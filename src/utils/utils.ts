@@ -10,7 +10,7 @@ const resizeImg = async (imgFile: string, width: number, height: number): Promis
     fs.mkdirSync(resizeDir)
   }
 
-  if (width && height) {
+  if (width && height && width > 0 && height > 0) {
     const outPath = path.join(imgsDir, 'thumbnail', `${imgFile}-width${width}-height${height}.jpg`)
     const inPath = path.join(imgsDir, imgFile + '.jpg')
     const img = sharp(inPath)
@@ -22,7 +22,7 @@ const resizeImg = async (imgFile: string, width: number, height: number): Promis
       })
       .toFile(outPath)
     return outPath
-  } else if (!height && width) {
+  } else if (!height && width && width > 0) {
     //if only width is provided
     const outPath = path.join(imgsDir, 'thumbnail', `${imgFile}-width${width}.jpg`)
     const inPath = path.join(imgsDir, imgFile + '.jpg')
@@ -36,16 +36,18 @@ const resizeImg = async (imgFile: string, width: number, height: number): Promis
     return outPath
   } else {
     //if only height is provided
-    const outPath = path.join(imgsDir, 'thumbnail', `${imgFile}-height${height}.jpg`)
-    const inPath = path.join(imgsDir, imgFile + '.jpg')
-    const img = sharp(inPath)
+    if (height > 0) {
+      const outPath = path.join(imgsDir, 'thumbnail', `${imgFile}-height${height}.jpg`)
+      const inPath = path.join(imgsDir, imgFile + '.jpg')
+      const img = sharp(inPath)
 
-    await img
-      .resize({
-        height
-      })
-      .toFile(outPath)
-    return outPath
+      await img
+        .resize({
+          height
+        })
+        .toFile(outPath)
+      return outPath
+    }
   }
 }
 
