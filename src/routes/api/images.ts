@@ -15,7 +15,7 @@ images.get('/', async(req: Request, res: Response): Promise<void> => {
         }
     } else {
         res.status(400);
-        res.send('Image does not exist');
+        res.send('Please provide a valid filename as a query parameter');
     }
 });
 

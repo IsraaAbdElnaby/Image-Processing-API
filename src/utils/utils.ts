@@ -12,7 +12,7 @@ const resizeImg = async (imgFile: string, width: number, height: number):
     }
     
     if(width && height) {
-        const outPath = path.join(imgsDir, 'thumbnail', `${imgFile}-width-${width}-height-${height}.jpg`);
+        const outPath = path.join(imgsDir, 'thumbnail', `${imgFile}-width${width}-height${height}.jpg`);
         const inPath = path.join(imgsDir,imgFile+'.jpg');
         const img = sharp(inPath);
 
@@ -23,7 +23,7 @@ const resizeImg = async (imgFile: string, width: number, height: number):
         .toFile(outPath);
         return outPath;
     } else if (!height && width) { //if only width is provided
-        const outPath = path.join(imgsDir, 'thumbnail', `${imgFile}-width-${width}.jpg`);
+        const outPath = path.join(imgsDir, 'thumbnail', `${imgFile}-width${width}.jpg`);
         const inPath = path.join(imgsDir,imgFile+'.jpg');
         const img = sharp(inPath);
 
@@ -33,7 +33,7 @@ const resizeImg = async (imgFile: string, width: number, height: number):
         .toFile(outPath);
         return outPath;
     } else { //if only height is provided
-        const outPath = path.join(imgsDir, 'thumbnail', `${imgFile}-height-${height}.jpg`);
+        const outPath = path.join(imgsDir, 'thumbnail', `${imgFile}-height${height}.jpg`);
         const inPath = path.join(imgsDir,imgFile+'.jpg');
         const img = sharp(inPath);
 
@@ -48,7 +48,7 @@ const resizeImg = async (imgFile: string, width: number, height: number):
 export const getImgPath = async (imgFile: string, width: number, height: number):
 Promise<string> => {
     const imgsDir = getDirectory();
-    const originalImg = path.join(imgsDir, imgFile + '.jpg');
+    const originalImg = path.join(imgsDir, `${imgFile}.jpg`);
 
     if (!width && !height) {
         return originalImg;

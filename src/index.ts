@@ -13,9 +13,16 @@ app.use(morgan('short'))
 // add routing for /api path
 app.use('/api', routes)
 
+app.get(
+  '/',
+  async (req: Request, res: Response): Promise<void> => {
+    res.send('Welcom to Image Prossesing App..... use api/images?filename={yourfilename} to get started');
+  }
+);
+
 // start express server
 app.listen(PORT, () => {
-  console.log(`Server is starting at prot:${PORT}`)
+  console.log(`Server is starting at port:${PORT}`)
 })
 
 export default app
